@@ -66,9 +66,7 @@ struct CommentsPage: View {
                     }
                 }
                 .animation(.smooth(duration: 0.3), value: newComment)
-                .padding(.horizontal)
-                .padding(.vertical, 4)
-                .background(.background)
+                .safeAreaInsetStyle()
             }
             .scrollDismissesKeyboard(.automatic)
             .contentShape(Rectangle())

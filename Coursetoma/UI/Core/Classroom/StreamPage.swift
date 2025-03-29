@@ -17,7 +17,7 @@ struct StreamPage: View {
                 CourseBannerSection()
                 
                 //MARK: - ANNOUNCEMENTS SECTION
-                AnnouncementButton()
+                AnnouncementMakerButton()
                 
                 ForEach(Announcement.mockAnnouncements) { announcement in
                     AnnouncementTile(announcement: announcement)

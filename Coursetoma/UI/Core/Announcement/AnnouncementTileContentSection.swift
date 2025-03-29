@@ -12,6 +12,10 @@ struct AnnouncementTileContentSection: View {
     
     var attachments: [Attachment] { announcement.attachments ?? [] }
     
+    let columns = [
+        GridItem(.adaptive(minimum: 120)) // Adaptive layout
+    ]
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             if let message = announcement.message {
@@ -20,23 +24,15 @@ struct AnnouncementTileContentSection: View {
             }
             
             if !attachments.isEmpty {
-                HStack {
+                
+                LazyVGrid(columns: columns, spacing: 10) {
                     ForEach(attachments) { attachment in
-                        HStack(spacing: 8) {
-                            attachment.image
-                                .foregroundStyle(.appPrimary)
-                            
-                            //TODO: - Fix file name
-                            Text(attachment.content.suggestedFilename ?? "file")
-                                .font(.footnote.weight(.medium))
-                        }
-                        .padding(.vertical, 6)
-                        .padding(.horizontal, 10)
-                        .borderedContainerStyle(cornerRadius: 16)
-                        .onTapGesture {
-                            //TODO: - Make this clickable to view attachments
-                            print("Attachment")
-                        }
+                        
+                        AttachmentTile(attachment: attachment)
+                            .onTapGesture {
+                                //TODO: - Make this clickable to view attachments
+                                print("Attachment")
+                            }
                     }
                     Spacer()
                 }

@@ -1,5 +1,5 @@
 //
-//  AnnouncementButton.swift
+//  AnnouncementMakerButton.swift
 //  Coursetoma
 //
 //  Created by Jamiu Jimoh on 27/03/2025.
@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct AnnouncementButton: View {
+struct AnnouncementMakerButton: View {
+    @State private var showSheet = false
+    
     var currentUser: User { User.mockCurrentUser }
     
     var body: some View {
@@ -28,13 +30,12 @@ struct AnnouncementButton: View {
         .borderedContainerStyle()
         .clipShape(.rect(cornerRadius: 8))
         .onTapGesture {
-            //TODO: - pop up dialog to create announcement
-            print("Create announcement")
-
+            showSheet = true
         }
+        .sheet(isPresented: $showSheet) { CreateAnnouncementPage() }
     }
 }
 
 #Preview {
-    AnnouncementButton()
+    AnnouncementMakerButton()
 }

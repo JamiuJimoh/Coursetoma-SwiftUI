@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct Attachment: Identifiable {
     let id: String
-    let content: Data
+    let url: URL
     let type: AttachmentType
     let createdAt: Date
     
@@ -27,23 +28,29 @@ struct Attachment: Identifiable {
         case link
     }
     
+    static func getFileType(for url: URL) -> AttachmentType {
+        guard let type = UTType(filenameExtension: url.pathExtension) else { return .file }
+
+        if type.conforms(to: .image) { return .image }
+        return .file
+    }
+    
     static let mockAttachments: [Attachment] = [
         Attachment(
             id: "attachment_006",
-            content: Data("Year.png".utf8),
-            //                    content: Data(contentsOf: <#T##URL#>),
+            url: URL(filePath: "Year.png")!,
             type: .image,
             createdAt: Date().addingTimeInterval(-14400) // 4 hours ago
         ),
         Attachment(
             id: "attachment_007",
-            content: Data("Olamilekan.pdf".utf8),
+            url: URL(filePath: "Olamilekan.pdf")!,
             type: .file,
             createdAt: Date().addingTimeInterval(-18000) // 5 hours ago
         ),
         Attachment(
             id: "attachment_008",
-            content: Data("https://www.google.com".utf8),
+            url: URL(string: "https://www.google.com")!,
             type: .link,
             createdAt: Date().addingTimeInterval(-21600) // 6 hours ago
         )

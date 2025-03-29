@@ -23,7 +23,8 @@ struct CTextField: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(label)
-                .font(.footnote.weight(.medium))
+                .textFieldLabelStyle()
+            
             Group {
                 switch type {
                 case .normal(let lineLimit, let reservesSpace):
