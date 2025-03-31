@@ -30,10 +30,27 @@ struct Announcement: Identifiable {
     var title: String {
         switch type {
         case .normal: creator.fullname
+        case .material(let material): material.title
+        }
+    }
+    
+    var titleWithMaterial: String {
+        switch type {
+        case .normal: creator.fullname
         case .material(let material): "New material: \(material.title)"
         }
     }
     
+    var commentText: String {
+        if commentCount == 0 {
+            return "Add class comment"
+        } else if commentCount == 1 {
+            return "1 class comment"
+        } else {
+            return "\(commentCount) class comments"
+        }
+    }
+
     let imageSize: CGFloat = 43
     
     @ViewBuilder

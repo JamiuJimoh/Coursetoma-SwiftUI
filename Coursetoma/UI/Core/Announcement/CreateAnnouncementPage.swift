@@ -13,6 +13,7 @@ struct CreateAnnouncementPage: View {
     @State private var showFilePicker = false
     @State private var selectedFilesURL = Set<URL>()
     @State private var quickLookURL: URL? = nil
+    @Binding var isSheetOpen: Bool
 
     @FocusState private var fieldIsFocused: Bool
 
@@ -102,6 +103,7 @@ struct CreateAnnouncementPage: View {
                 .safeAreaInsetStyle()
                 .environment(\.buttonDisabled, !isValidText)
             }
+            .toolBarWithCloseButton(isSheetOpen: $isSheetOpen)
         }
         
     }
@@ -115,5 +117,5 @@ struct CreateAnnouncementPage: View {
 }
 
 #Preview {
-    CreateAnnouncementPage()
+    CreateAnnouncementPage(isSheetOpen: .constant(true))
 }

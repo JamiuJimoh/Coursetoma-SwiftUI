@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ClickableDoubleTextView: View {
-    var LText: String
-    var RText: String
-    var action: () -> Void
+    let LText: String
+    let RText: String
+    let action: () -> Void
     
     var body: some View {
         HStack {

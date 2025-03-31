@@ -9,19 +9,11 @@ import SwiftUI
 
 struct AnnouncementTile: View {
     @State private var showComments = false
-    
+    @State private var showDetails = false
+
     var announcement: Announcement
     
     var creator: User { announcement.creator }
-    var commentText: String {
-        if announcement.commentCount == 0 {
-            return "Add class comment"
-        } else if announcement.commentCount == 1 {
-            return "1 class comment"
-        } else {
-            return "\(announcement.commentCount) class comments"
-        }
-    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -34,10 +26,7 @@ struct AnnouncementTile: View {
             }
             .padding(.horizontal, 12)
             .contentShape(Rectangle())
-            .onTapGesture {
-                //TODO: - Make this clickable to view announcement details
-                print("Announcement details")
-            }
+            .onTapGesture { showDetails = true }
 
             //MARK: - COMMENT SECTION
             VStack(alignment: .leading, spacing: 12) {
@@ -45,7 +34,7 @@ struct AnnouncementTile: View {
                     .frame(height: 1)
                     .overlay(.appGreyBorder)
                 
-                Text(commentText)
+                Text(announcement.commentText)
                     .font(.caption.weight(.medium))
                     .foregroundStyle(.appFontSubheadline)
                     .padding(.horizontal, 12)
@@ -56,6 +45,9 @@ struct AnnouncementTile: View {
             .onTapGesture { showComments = true }
             .sheet(isPresented: $showComments) {
                 CommentsPage(announcementID: announcement.id, showComments: $showComments)
+            }
+            .sheet(isPresented: $showDetails) {
+                AnnouncementDetailsPage(announcement: announcement, isSheetOpen: $showDetails)
             }
 
         }

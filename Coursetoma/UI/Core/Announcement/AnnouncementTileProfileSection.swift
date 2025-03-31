@@ -11,22 +11,19 @@ struct AnnouncementTileProfileSection: View {
     var announcement: Announcement
     
     var body: some View {
-        HStack(spacing: 8.0) {
-            announcement.image
-            VStack(alignment: .leading, spacing: 4) {
-                Text(announcement.title)
-                    .font(.subheadline.weight(.medium))
-                Text(announcement.createdAt.formatted(.dateTime.day().month(.abbreviated).year().hour().minute()))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+        ProfileWithDateTile(
+            profileImage: announcement.image as! AnyView,
+            title: announcement.titleWithMaterial,
+            date: announcement.createdAt) {
+                Spacer()
+                
+                Image(systemName: "ellipsis")
+                    .onTapGesture {
+                        //TODO: - Make this clickable to "more" context
+                        print("More option")
+                    }
+                
             }
-            Spacer()
-            Image(systemName: "ellipsis")
-                .onTapGesture {
-                    //TODO: - Make this clickable to "more" context
-                    print("More option")
-                }
-        }
     }
 }
 

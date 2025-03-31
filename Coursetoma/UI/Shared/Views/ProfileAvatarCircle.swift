@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ProfileAvatarCircle: View {
     var size = 50.0
-    var avatarURL: URL?
-    var initials: String
+    let avatarURL: URL?
+    let initials: String
     
     var body: some View {
         ZStack {

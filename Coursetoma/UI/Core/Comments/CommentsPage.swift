@@ -29,15 +29,7 @@ struct CommentsPage: View {
                 }
                 .padding()
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showComments = false
-                    } label: {
-                        Image(systemName: "xmark.circle")
-                    }
-                }
-            }
+            .toolBarWithCloseButton(isSheetOpen: $showComments)
             .safeAreaInset(edge: .bottom) {
                 HStack(alignment: .bottom, spacing: 8) {
                     CTextField(

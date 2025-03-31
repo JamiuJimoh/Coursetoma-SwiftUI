@@ -12,7 +12,7 @@ struct SwipablePageTabView<T: SwipablePageEnumConstraints, Content: View>: View 
     @Binding var selectedTab: T
     @Namespace private var namespace
     @State private var scrollPosition = ScrollPosition(idType: T.self)
-    var childView: (T) -> Content
+    let childView: (T) -> Content
     
     var body: some View {
         VStack(spacing: 0) {

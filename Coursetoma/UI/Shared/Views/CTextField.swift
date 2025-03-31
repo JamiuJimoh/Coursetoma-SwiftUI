@@ -10,8 +10,8 @@ import SwiftUI
 struct CTextField: View {
     @Environment(\.inputInValidMessage) private var validityMessage
     var type: TextFieldType = .normal()
-    var label: String
-    var hint: String
+    let label: String
+    let hint: String
     var isFocused: Bool = false
 
     @Binding var text: String

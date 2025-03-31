@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AttachmentTile: View {
-    var attachment: Attachment
+    let attachment: Attachment
     
     var title: String {
         if attachment.type == .link {
