@@ -30,6 +30,9 @@ struct AnnouncementDetailsPage: View {
                             .font(.footnote)
                     }
                     
+                    Divider()
+                        .dividerStyle()
+
                     //MARK: - ATTACHMENTS SECTION
                     if let attachments = announcement.attachments {
                         VStack(alignment:.leading, spacing: 8) {
@@ -50,6 +53,9 @@ struct AnnouncementDetailsPage: View {
                     }
                     //MARK: - ATTACHMENTS SECTION END
 
+                    Divider()
+                        .dividerStyle()
+                    
                     Button {
                         showComments = true
                     } label: {

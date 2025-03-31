@@ -31,8 +31,7 @@ struct AnnouncementTile: View {
             //MARK: - COMMENT SECTION
             VStack(alignment: .leading, spacing: 12) {
                 Divider()
-                    .frame(height: 1)
-                    .overlay(.appGreyBorder)
+                    .dividerStyle()
                 
                 Text(announcement.commentText)
                     .font(.caption.weight(.medium))

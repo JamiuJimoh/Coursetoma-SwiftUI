@@ -26,23 +26,11 @@ struct CoursesPage: View {
                 .frame(minHeight: geometry.size.height)
             }
             .scrollIndicators(.hidden)
-            .safeAreaInset(edge: .bottom) {
-                HStack {
-                    Spacer()
-                    Button {
-                        showSheet = true
-                    }label: {
-                        Image(systemName: "plus")
-                            .font(.system(size: 24, weight: .medium))
-                            .foregroundStyle(.white)
-                            .padding()
-                            .background(.primary)
-                            .clipShape(.circle)
-                            .shadow(color: Color.black.opacity(0.25), radius: 5.74, x: 0, y: 5.74)
-                    }
-                }
-                .padding()
-                .padding(.trailing, 24)
+            .floatingActionButton {
+                showSheet = true
+            } label: {
+                Image(systemName: "plus")
+                    .floatingActionButtonStyle()
             }
         }
         .sheet(isPresented: $showSheet) {

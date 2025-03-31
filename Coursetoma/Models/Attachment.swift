@@ -8,7 +8,7 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct Attachment: Identifiable {
+struct Attachment: Equatable, Identifiable {
     let id: String
     let url: URL
     let type: AttachmentType

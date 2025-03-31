@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Material: Identifiable {
+struct Material: Equatable, Identifiable {
     let id: String
     let title: String
     let description: String?
     let attachments: [Attachment]?
-    
+
     static let mockMaterials: [Material] = [
         Material(
             id: "M1",

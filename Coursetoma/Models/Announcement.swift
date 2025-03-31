@@ -71,6 +71,12 @@ struct Announcement: Identifiable {
         case normal(String, [Attachment]?)
         case material(Material)
         
+        var isMaterial: Bool {
+            switch self {
+            case .normal: return false
+            case .material: return true
+            }
+        }
     }
 }
 

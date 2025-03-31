@@ -21,7 +21,7 @@ struct ClassroomTab: View {
                         StreamPage(course: course)
                             .listRowSeparator(.hidden)
                     case .materials:
-                        MaterialsPage(course: course)
+                        MaterialsPage(courseID: course.id)
                             .listRowSeparator(.hidden)
                     case .people:
                         PeoplePage(course: course)
