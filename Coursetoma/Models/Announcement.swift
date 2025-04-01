@@ -20,6 +20,7 @@ struct Announcement: Identifiable {
         case .material: nil
         }
     }
+    
     var attachments: [Attachment]? {
         switch type {
         case .normal( _, let attachments): attachments
@@ -50,7 +51,14 @@ struct Announcement: Identifiable {
             return "\(commentCount) class comments"
         }
     }
-
+    
+    var detailsDescription: String? {
+        switch type {
+        case .normal(let text, _): text
+        case .material(let material): material.description
+        }
+    }
+    
     let imageSize: CGFloat = 43
     
     @ViewBuilder

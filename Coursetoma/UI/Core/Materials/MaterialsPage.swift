@@ -55,7 +55,7 @@ struct MaterialsPage: View {
             Image(systemName: "plus")
                 .floatingActionButtonStyle()
         }
-        .sheet(isPresented: $showCreateMaterial) { CreateMaterialPage() }
+        .sheet(isPresented: $showCreateMaterial) { CreateMaterialPage(isSheetOpen: $showCreateMaterial) }
     }
 }
 

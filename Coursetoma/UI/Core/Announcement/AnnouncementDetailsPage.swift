@@ -25,7 +25,8 @@ struct AnnouncementDetailsPage: View {
                         Spacer()
                     }
                     
-                    if let message = announcement.message {
+                        
+                    if let message = announcement.detailsDescription {
                         Text(message)
                             .font(.footnote)
                     }

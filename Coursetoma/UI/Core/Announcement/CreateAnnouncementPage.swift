@@ -37,56 +37,11 @@ struct CreateAnnouncementPage: View {
                     .submitLabel(.return)
                     .onSubmit(submit)
                     
-                    VStack {
-                        HStack(spacing: 8) {
-                            Text("Attachments")
-                                .textFieldLabelStyle()
-                            
-                            Spacer()
-                            
-                            Button {
-                                showFilePicker = true
-                            } label: {
-                                Image(systemName: "paperclip.circle")
-                                    .foregroundStyle(.primary)
-                                    .imageScale(.large)
-                            }
-                            .fileImporter(
-                                isPresented: $showFilePicker,
-                                allowedContentTypes: [.pdf, .image, .plainText, .text, .spreadsheet, .video ],
-                                allowsMultipleSelection: true
-                            ) { result in
-                                do {
-                                    let picked = Set(try result.get())
-                                    selectedFilesURL.formUnion(picked)
-                                } catch {
-                                    //TODO: - Handle Error
-
-                                    print("Error picking file: \(error.localizedDescription)")
-                                }
-                            }
-                            
-                        }
-                        
-                        if !selectedFilesURL.isEmpty {
-                            HStack {
-                                ForEach(Array(selectedFilesURL), id: \.absoluteString) { url in
-                                    AttachmentTile(
-                                        attachment: Attachment(
-                                            id: url.absoluteString,
-                                            url: url,
-                                            type: Attachment.getFileType(for: url),
-                                            createdAt: Date()
-                                        )
-                                    )
-                                    .onTapGesture { quickLookURL = url }
-                                    .quickLookPreview($quickLookURL)
-                                }
-                                Spacer()
-                            }
-
-                        }
-                    }
+                    AttachmentPicker(
+                        showFilePicker: $showFilePicker,
+                        selectedFilesURL: $selectedFilesURL,
+                        quickLookURL: $quickLookURL
+                    )
                 }
                 .padding()
             }
