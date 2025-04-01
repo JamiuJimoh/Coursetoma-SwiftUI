@@ -20,7 +20,7 @@ struct FloatingActionButton<Label: View>: ViewModifier {
                     Button(action: action, label: label)
                 }
                 .padding()
-                .padding(.trailing, 24)
+//                .padding(.trailingvoiceover)
             }
     }
 }

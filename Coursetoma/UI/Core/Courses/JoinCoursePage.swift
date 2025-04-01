@@ -17,7 +17,6 @@ struct JoinCoursePage: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            Spacer()
             Text("Ask your teacher for the course IV, then enter it below.")
                 .font(.callout.weight(.medium))
             
@@ -42,8 +41,6 @@ struct JoinCoursePage: View {
             
         }
         .onAppear { fieldIsFocused = true }
-        .contentShape(Rectangle())
-        .onTapGesture { fieldIsFocused = false }
         .padding()
         .environment(\.buttonDisabled, !canSubmit)
         .navigationTitle("Join Course")
