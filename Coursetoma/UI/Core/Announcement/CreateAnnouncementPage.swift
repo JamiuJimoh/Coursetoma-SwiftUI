@@ -58,7 +58,7 @@ struct CreateAnnouncementPage: View {
                 .safeAreaInsetStyle()
                 .environment(\.buttonDisabled, !isValidText)
             }
-            .toolBarWithCloseButton(isSheetOpen: $isSheetOpen)
+            .toolBarWithCloseButton()
         }
         
     }

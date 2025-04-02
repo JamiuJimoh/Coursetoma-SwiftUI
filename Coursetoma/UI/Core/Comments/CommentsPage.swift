@@ -29,7 +29,7 @@ struct CommentsPage: View {
                 }
                 .padding()
             }
-            .toolBarWithCloseButton(isSheetOpen: $showComments)
+            .toolBarWithCloseButton()
             .safeAreaInset(edge: .bottom) {
                 HStack(alignment: .bottom, spacing: 8) {
                     CTextField(

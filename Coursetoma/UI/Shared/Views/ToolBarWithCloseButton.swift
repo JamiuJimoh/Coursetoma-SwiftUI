@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ToolBarWithCloseButton: ViewModifier {
-    @Binding var isSheetOpen: Bool
+    @Environment(\.dismiss) var dismiss
     
     func body(content: Content) -> some View {
         content
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        isSheetOpen = false
+                        dismiss()
                     } label: {
                         Image(systemName: "xmark.circle")
                     }
@@ -25,7 +25,7 @@ struct ToolBarWithCloseButton: ViewModifier {
 }
 
 extension View {
-    func toolBarWithCloseButton(isSheetOpen: Binding<Bool>) -> some View {
-        modifier(ToolBarWithCloseButton(isSheetOpen: isSheetOpen))
+    func toolBarWithCloseButton() -> some View {
+        modifier(ToolBarWithCloseButton())
     }
 }

@@ -71,7 +71,7 @@ struct CreateMaterialPage: View {
                     .safeAreaInsetStyle()
                     .environment(\.buttonDisabled, !isValidTitle)
             }
-            .toolBarWithCloseButton(isSheetOpen: $isSheetOpen)
+            .toolBarWithCloseButton()
         }
         
     }

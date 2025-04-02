@@ -70,7 +70,7 @@ struct AnnouncementDetailsPage: View {
                 }
                 .padding()
             }
-            .toolBarWithCloseButton(isSheetOpen: $isSheetOpen)
+            .toolBarWithCloseButton()
         }
     }
 }

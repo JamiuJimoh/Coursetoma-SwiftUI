@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct StudentsPage: View {
+    @State private var showInviteSheet = false
+    
     var courseID: String
     
     var students: [User] { User.mockUsers }
@@ -16,9 +18,12 @@ struct StudentsPage: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 PeopleHeader(title: "Students") {
-                    //TODO: - Add user
+                    showInviteSheet = true
                 }
-                
+                .sheet(isPresented: $showInviteSheet) {
+                    InvitePersonPage(inviteType: .student)
+                }
+
                 ForEach(students) { student in
                     PersonTile(person: student) {
                         Spacer()

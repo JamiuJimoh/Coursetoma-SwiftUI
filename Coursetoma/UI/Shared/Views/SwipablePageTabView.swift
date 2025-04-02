@@ -68,6 +68,7 @@ struct SwipablePageTabView<T: SwipablePageEnumConstraints, Content: View>: View 
             }
             .scrollPosition($scrollPosition, anchor: .center)
             .scrollTargetBehavior(.viewAligned)
+            .scrollIndicators(.hidden)
 
         }
     }

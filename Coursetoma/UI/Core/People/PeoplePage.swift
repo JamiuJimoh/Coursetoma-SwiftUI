@@ -20,7 +20,6 @@ struct PeoplePage: View {
             }
         }
         .transition(.blurReplace)
-//        .transition(.move(edge: .leading).combined(with: .scale))
         .floatingActionButton {
             withAnimation(.smooth(duration: 0.26)) {
                 viewType.toggle()

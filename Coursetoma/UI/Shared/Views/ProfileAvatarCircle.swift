@@ -13,10 +13,6 @@ struct ProfileAvatarCircle: View {
     let initials: String
     
     var body: some View {
-        ZStack {
-            Circle()
-                .fill(.appGreyBorder)
-            
             Group {
                 AsyncImage(url: avatarURL) { phase in
                     switch phase {
@@ -30,12 +26,9 @@ struct ProfileAvatarCircle: View {
                     }
                 }
             }
-        }
-//        .overlay  {
-//            Circle().stroke()
-//        }
-        .frame(width: size, height: size)
-        .borderedContainerStyle(cornerRadius: size)
+            .frame(width: size, height: size)
+            .background(.appGreyBorder)
+            .clipShape(.circle)
     }
 }
 

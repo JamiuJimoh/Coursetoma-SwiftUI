@@ -33,6 +33,7 @@ struct ClassroomTab: View {
             .onChange(of: selectedTab) { _, newValue in
             }
         }
+//        .navigationBarBackButtonHidden()
         .task {
         }
     }
@@ -47,5 +48,7 @@ struct ClassroomTab: View {
 }
 
 #Preview {
-    ClassroomTab(course: StudentCourse.mock[0])
+    NavigationStack {
+        ClassroomTab(course: StudentCourse.mock[0])
+    }
 }
