@@ -32,7 +32,7 @@ struct AnnouncementMakerButton: View {
         .onTapGesture {
             showSheet = true
         }
-        .sheet(isPresented: $showSheet) { CreateAnnouncementPage(isSheetOpen: $showSheet) }
+        .sheet(isPresented: $showSheet) { EditAnnouncementPage(isSheetOpen: $showSheet) }
     }
 }
 

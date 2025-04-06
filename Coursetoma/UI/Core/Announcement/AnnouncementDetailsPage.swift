@@ -31,8 +31,10 @@ struct AnnouncementDetailsPage: View {
                             .font(.footnote)
                     }
                     
-                    Divider()
-                        .dividerStyle()
+                    if announcement.attachments != nil {
+                        Divider()
+                            .dividerStyle()
+                    }
 
                     //MARK: - ATTACHMENTS SECTION
                     if let attachments = announcement.attachments {
@@ -40,7 +42,7 @@ struct AnnouncementDetailsPage: View {
                             Text("Attachments")
                                 .textFieldLabelStyle()
                             
-                            HStack(spacing: 12) {
+                            WrapStack(spacing: 12) {
                                 ForEach(attachments) { attachment in
                                     AttachmentTile(attachment: attachment)
                                         .onTapGesture {

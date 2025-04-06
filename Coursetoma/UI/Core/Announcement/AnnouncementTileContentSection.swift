@@ -25,7 +25,7 @@ struct AnnouncementTileContentSection: View {
             
             if !attachments.isEmpty {
                 
-                LazyVGrid(columns: columns, spacing: 10) {
+                WrapStack(spacing: 8) {
                     ForEach(attachments) { attachment in
                         
                         AttachmentTile(attachment: attachment)

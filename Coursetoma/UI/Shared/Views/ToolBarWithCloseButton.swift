@@ -10,14 +10,14 @@ import SwiftUI
 struct ToolBarWithCloseButton: ViewModifier {
     @Environment(\.dismiss) var dismiss
     
+    var title: String
+    
     func body(content: Content) -> some View {
         content
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(title, role: .cancel) {
                         dismiss()
-                    } label: {
-                        Image(systemName: "xmark.circle")
                     }
                 }
             }
@@ -25,7 +25,7 @@ struct ToolBarWithCloseButton: ViewModifier {
 }
 
 extension View {
-    func toolBarWithCloseButton() -> some View {
-        modifier(ToolBarWithCloseButton())
+    func toolBarWithCloseButton(title: String = "Close") -> some View {
+        modifier(ToolBarWithCloseButton(title: title))
     }
 }

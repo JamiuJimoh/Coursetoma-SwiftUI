@@ -1,5 +1,5 @@
 //
-//  CreateAnnouncementPage.swift
+//  EditAnnouncementPage.swift
 //  Coursetoma
 //
 //  Created by Jamiu Jimoh on 28/03/2025.
@@ -8,11 +8,13 @@
 import SwiftUI
 import QuickLook
 
-struct CreateAnnouncementPage: View {
+struct EditAnnouncementPage: View {
     @State private var text = ""
     @State private var showFilePicker = false
     @State private var selectedFilesURL = Set<URL>()
     @State private var quickLookURL: URL? = nil
+    
+    var announcement: Announcement?
     @Binding var isSheetOpen: Bool
 
     @FocusState private var fieldIsFocused: Bool
@@ -21,7 +23,15 @@ struct CreateAnnouncementPage: View {
         !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
+    var pageTitle: String {
+        if announcement == nil {
+            return "Create Announcement"
+        }
+        return "Edit Announcement"
+    }
+    
     var body: some View {
+        
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
@@ -48,17 +58,18 @@ struct CreateAnnouncementPage: View {
             .scrollDismissesKeyboard(.automatic)
             .contentShape(Rectangle())
             .onTapGesture { fieldIsFocused = false }
-            .navigationTitle("Create Announcement")
+            .navigationTitle(pageTitle)
             .navigationBarTitleDisplayMode(.inline)
             .safeAreaInset(edge: .bottom) {
-                Button("Create Announcement") {
+                Button(pageTitle) {
                     
                 }
                 .buttonStyle(.primaryStyle)
                 .safeAreaInsetStyle()
                 .environment(\.buttonDisabled, !isValidText)
             }
-            .toolBarWithCloseButton()
+            .onAppear { text = announcement?.message ?? "" }
+            .toolBarWithCloseButton(title: "Cancel")
         }
         
     }
@@ -72,5 +83,5 @@ struct CreateAnnouncementPage: View {
 }
 
 #Preview {
-    CreateAnnouncementPage(isSheetOpen: .constant(true))
+    EditAnnouncementPage(isSheetOpen: .constant(true))
 }

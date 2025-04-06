@@ -46,7 +46,7 @@ struct AttachmentPicker: View {
             }
             
             if !selectedFilesURL.isEmpty {
-                HStack {
+                WrapStack(spacing: 8) {
                     ForEach(Array(selectedFilesURL), id: \.absoluteString) { url in
                         AttachmentTile(
                             attachment: Attachment(

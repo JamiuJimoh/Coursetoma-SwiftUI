@@ -10,6 +10,8 @@ import SwiftUI
 struct MaterialsPage: View {
     @State private var showDetails = false
     @State private var showCreateMaterial = false
+    @State private var showSheet = false
+    @State private var showAlert = false
 
     var courseID: String
 
@@ -27,14 +29,25 @@ struct MaterialsPage: View {
                         date: announcement.createdAt
                     ) {
                         Spacer()
-                        
-                        Image(systemName: "ellipsis")
-                            .onTapGesture {
-                                //TODO: - Make this clickable to "more" context
-                                print("More option")
+
+                        Menu {
+                            Button("Edit") { showSheet = true }
+
+                            Button("Delete", role: .destructive) { showAlert = true }
+                        } label: {
+                            Image(systemName: "ellipsis")
+                                .imageScale(.medium)
+                        }
+                        .sheet(isPresented: $showSheet) {
+                            switch announcement.type {
+                            case .normal(_, _):
+                                EmptyView()
+                            case .material(let material):
+                                EditMaterialPage(material: material, isSheetOpen: $showSheet)
                             }
-                        
-                        
+            
+                        }
+
                     }
                     .padding([.horizontal, .vertical], 10)
                     .contentShape(Rectangle())
@@ -44,6 +57,13 @@ struct MaterialsPage: View {
                     }
                     .sheet(isPresented: $showDetails) {
                         AnnouncementDetailsPage(announcement: announcement, isSheetOpen: $showDetails)
+                    }
+                    .alert("Delete Material", isPresented: $showAlert) {
+                        Button ("Yes", role: .destructive) {
+                            //TODO: - Handle delete announcement
+                        }
+                    } message: {
+                        Text("Are you sure you want to delete this material?")
                     }
                 }
             }
@@ -55,7 +75,7 @@ struct MaterialsPage: View {
             Image(systemName: "plus")
                 .floatingActionButtonStyle()
         }
-        .sheet(isPresented: $showCreateMaterial) { CreateMaterialPage(isSheetOpen: $showCreateMaterial) }
+        .sheet(isPresented: $showCreateMaterial) { EditMaterialPage(isSheetOpen: $showCreateMaterial) }
     }
 }
 

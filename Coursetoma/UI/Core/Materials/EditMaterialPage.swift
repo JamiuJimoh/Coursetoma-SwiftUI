@@ -1,5 +1,5 @@
 //
-//  CreateMaterialPage.swift
+//  EditMaterialPage.swift
 //  Coursetoma
 //
 //  Created by Jamiu Jimoh on 31/03/2025.
@@ -7,16 +7,17 @@
 
 import SwiftUI
 
-struct CreateMaterialPage: View {
+struct EditMaterialPage: View {
     @State private var title = ""
     @State private var description = ""
     @State private var showFilePicker = false
     @State private var selectedFilesURL = Set<URL>()
     @State private var quickLookURL: URL? = nil
-    @Binding var isSheetOpen: Bool
+    @State private var errors = [String: Bool]()
     @FocusState var focusField: CreateMaterialFocusField?
     
-    @State private var errors = [String: Bool]()
+    var material: Material?
+    @Binding var isSheetOpen: Bool
 
     var isValidTitle: Bool {
         !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -63,15 +64,20 @@ struct CreateMaterialPage: View {
             .scrollDismissesKeyboard(.automatic)
             .contentShape(Rectangle())
             .onTapGesture { focusField = nil }
-            .navigationTitle("Create Material")
+            .navigationTitle("\(material == nil ? "Create" : "Edit") Material")
             .navigationBarTitleDisplayMode(.inline)
             .safeAreaInset(edge: .bottom) {
-                Button("Post Material", action: submit)
+                Button("\(material == nil ? "Post" : "Edit") Material", action: submit)
                     .buttonStyle(.primaryStyle)
                     .safeAreaInsetStyle()
                     .environment(\.buttonDisabled, !isValidTitle)
             }
-            .toolBarWithCloseButton()
+            .onAppear {
+                title = material?.title ?? ""
+                description = material?.description ?? ""
+                //TODO: - handle selected files
+            }
+            .toolBarWithCloseButton(title: "Cancel")
         }
         
     }
@@ -90,5 +96,5 @@ struct CreateMaterialPage: View {
 }
 
 #Preview {
-    CreateMaterialPage(isSheetOpen: .constant(true))
+    EditMaterialPage(isSheetOpen: .constant(true))
 }
